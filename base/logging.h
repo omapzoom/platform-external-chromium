@@ -447,6 +447,9 @@ const LogSeverity LOG_0 = LOG_ERROR;
 //
 // We make sure CHECK et al. always evaluates their arguments, as
 // doing CHECK(FunctionWithSideEffect()) is a common idiom.
+#ifdef CHECK
+#undef CHECK
+#endif
 #define CHECK(condition)                       \
   LAZY_STREAM(LOG_STREAM(FATAL), !(condition)) \
   << "Check failed: " #condition ". "
@@ -491,6 +494,9 @@ extern template std::string* MakeCheckOpString<std::string, std::string>(
 //
 // TODO(akalin): Rewrite this so that constructs like if (...)
 // CHECK_EQ(...) else { ... } work properly.
+#ifdef CHECK_OP
+#undef CHECK_OP
+#endif
 #define CHECK_OP(name, op, val1, val2)                          \
   if (std::string* _result =                                    \
       logging::Check##name##Impl((val1), (val2),                \
@@ -520,11 +526,29 @@ DEFINE_CHECK_OP_IMPL(GE, >=)
 DEFINE_CHECK_OP_IMPL(GT, > )
 #undef DEFINE_CHECK_OP_IMPL
 
+#ifdef CHECK_EQ
+#undef CHECK_EQ
+#endif
 #define CHECK_EQ(val1, val2) CHECK_OP(EQ, ==, val1, val2)
+#ifdef CHECK_NE
+#undef CHECK_NE
+#endif
 #define CHECK_NE(val1, val2) CHECK_OP(NE, !=, val1, val2)
+#ifdef CHECK_LE
+#undef CHECK_LE
+#endif
 #define CHECK_LE(val1, val2) CHECK_OP(LE, <=, val1, val2)
+#ifdef CHECK_LT
+#undef CHECK_LT
+#endif
 #define CHECK_LT(val1, val2) CHECK_OP(LT, < , val1, val2)
+#ifdef CHECK_GE
+#undef CHECK_GE
+#endif
 #define CHECK_GE(val1, val2) CHECK_OP(GE, >=, val1, val2)
+#ifdef CHECK_GT
+#undef CHECK_GT
+#endif
 #define CHECK_GT(val1, val2) CHECK_OP(GT, > , val1, val2)
 
 // http://crbug.com/16512 is open for a real fix for this.  For now, Windows

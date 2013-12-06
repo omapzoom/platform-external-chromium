@@ -90,6 +90,9 @@ const  int64 kint64max  = (( int64) GG_LONGLONG(0x7FFFFFFFFFFFFFFF));
 // third_party libraries are yet using it.
 // TODO(tfarina): Figure out how to fix the usage of this macro in the
 // third_party libraries and get rid of it.
+#ifdef DISALLOW_EVIL_CONSTRUCTORS
+#undef DISALLOW_EVIL_CONSTRUCTORS
+#endif
 #define DISALLOW_EVIL_CONSTRUCTORS(TypeName) DISALLOW_COPY_AND_ASSIGN(TypeName)
 
 // A macro to disallow all the implicit constructors, namely the
