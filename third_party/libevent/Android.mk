@@ -19,6 +19,7 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/third_party/libevent \
     $(LOCAL_PATH)/third_party/libevent/android
 
-LOCAL_CFLAGS := -DHAVE_CONFIG_H -DANDROID -fvisibility=hidden
+LOCAL_CFLAGS := -DHAVE_CONFIG_H -DANDROID -fvisibility=hidden -Wno-unused-parameter
+LOCAL_CFLAGS += -Wno-sign-compare
 
 include $(BUILD_STATIC_LIBRARY)
