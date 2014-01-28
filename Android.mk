@@ -488,7 +488,7 @@ LOCAL_PRELINK_MODULE := false
 include external/stlport/libstlport.mk
 
 ifneq ($(strip $(WITH_ADDRESS_SANITIZER)),)
-    LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/asan
+    LOCAL_MODULE_RELATIVE_PATH := asan
     LOCAL_ADDRESS_SANITIZER := true
 endif
 
